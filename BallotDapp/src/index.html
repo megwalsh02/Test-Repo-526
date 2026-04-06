@@ -47,109 +47,65 @@
         <!-- Header -->
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-4 mt-4">Buy & Sell Your Items!</h1>
+                <h1 class="text-center mb-4 mt-4">Buy & Sell Your Items</h1>
                 <hr/>
             </div>
         </div>
 
         <!-- Proposals Row -->
-        <div class="row" id="proposalsRow">
-            <!-- Proposal 0: Milli -->
+        <div class="row">
+            <!-- Proposal 0: Sell -->
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card panel-proposal">
+                <div class="sell-container">
                     <div class="card-header text-center">
-                        <h4 class="card-title mb-0">Milli</h4>
+                        <h2 class="card-title mb-0">Sell Your Items</h2>
+                        <form id="sellForm" onsubmit="addItem(); return false;">
+                            <label for="itemname">Item Name:</label>
+                            <input type="text" id="itemName" name="itemName" placeholder="Enter Item Name" required>
+                            <label> Price (ETH):</label>
+                            <input type="number" id="itemPrice" placeholder="Enter Price" required>
+                            <button type="Submit">Sell</button>
+                        </form>
                     </div>
-                    <div class="card-body text-center">
-                        <img src="./images/Milli.png" 
-                             alt="Milli" class="proposal-image mb-3">
-                        <!-- <p class="vote-count">Votes: <span id="votes-0">0</span></p> -->
-                        <button class="btn btn-success btn-vote" id="Proposal0">Vote for Milli</button>
-                    </div>
-                </div>
-            </div>
+                    
 
-            <!-- Proposal 1: Murphy -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card panel-proposal">
-                    <div class="card-header text-center">
-                        <h4 class="card-title mb-0">Murphy</h4>
-                    </div>
-                    <div class="card-body text-center">
-                        <img src="./images/Murphy.png" 
-                             alt="Murphy" class="proposal-image mb-3">
-                        <!-- <p class="vote-count">Votes: <span id="votes-1">0</span></p> -->
-                        <button class="btn btn-success btn-vote" id="Proposal1">Vote for Murphy</button>
-                    </div>
                 </div>
-            </div>
 
-            <!-- Proposal 2: Radar -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card panel-proposal">
-                    <div class="card-header text-center">
-                        <h4 class="card-title mb-0">Radar</h4>
+                <div class="card-header text-center">
+                    <h3>Marketplace Listings</h3>
+                    <div id="listingContainer" class="marketplace-list">
                     </div>
-                    <div class="card-body text-center">
-                        <img src="./images/Radar.png" 
-                             alt="Radar" class="proposal-image mb-3">
-                        <!-- <p class="vote-count">Votes: <span id="votes-2">0</span></p> -->
-                        <button class="btn btn-success btn-vote" id="Proposal2">Vote for Radar</button>
-                    </div>
-                </div>
-            </div>
+                    <script>
+                        function addItem(){
+                            const input = document.getElementById('itemName');
+                            const itemName = input.value.trim();
 
-            <!-- Proposal 3: Riley -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="card panel-proposal">
-                    <div class="card-header text-center">
-                        <h4 class="card-title mb-0">Riley</h4>
-                    </div>
-                    <div class="card-body text-center">
-                        <img src="./images/Riley.png" 
-                             alt="Riley" class="proposal-image mb-3">
-                        <!-- <p class="vote-count">Votes: <span id="votes-3">0</span></p> -->
-                        <button class="btn btn-success btn-vote" id="Proposal3">Vote for Riley</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                            if (itemName === "") {
+                                alert("Please enter an item name!");
+                                return;
+                            }
+                            const container = document.getElementById('listingContainer');
+                            const newItem = document.createElement('div');
+                            newItem.className = 'item-card';
+                            newItem.innerHTML = `<strong>${itemName}</strong><br><small>Price: ${itemPrice}</small><br>
+                            <button onclick="buyItem'('${itemName}', '${itemPrice}')">Buy</button>
+                            `;
+                            
+                            container.appendChild(newItem);
 
-        <!-- Register adress and declare winner -->
-        <div class="row mt-4">
-          <div class="col-12">
-              <div class="card">
-                  <div class="card-body">
-                      <!-- Registration Section -->
-                      <div class="row mb-3">
-                          <div class="col-md-8">
-                              <input type="text" id="register-address" class="form-control" 
-                                    placeholder="Enter Ethereum address (0x...)">
-                          </div>
-                          <div class="col-md-4 d-flex align-items-end">
-                              <button class="btn btn-info btn-block" id="register-voter">Register Voter</button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="mt-4"></div>
-              <!-- Winner Section -->
-              <div class="card">
-                <div class="card-body">
-                  <div class="row mb-3">
-                      <div class="col-md-6">
-                          <button class="btn btn-danger btn-block" id="declare-winner">Declare Winner</button>
-                      </div>
-                      <div class="col-md-6">
-                          <div id="winner-result" class="alert alert-info" style="display: none;">
-                              <strong>Winner:</strong> <span id="winner-name"></span>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
+                            nameinput.value = "";
+                            priceinput.value = "";
+                        }
+                    </script>
+
+                    <script>
+                        function buyItem(name,price) {
+                            alert(`Buying ${name} for ${price}`);
+                        }
+                    </script>
                 </div>
-          </div>
-        </div>
+
+            </div>
 
 
 
